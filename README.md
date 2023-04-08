@@ -3,14 +3,10 @@
 This's a source create by GoTrust Team
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   All folders in this source:
+   - api: contain all method GET, POST, DELETE, PUT and use DIO to call server to get data
+   - model: contain all object model
+   - modules: contain all screen 
+   - resource: contain file config (load the first time when app run) and file language of app
+   - routes: use to define navigator screen on app 
+   - utils: contain common data file, logic file(validate, ...)
