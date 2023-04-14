@@ -13,9 +13,9 @@ This's a source create by GoTrust Team
 
 ## Deeplink was setup, you need add this config to use
 
-   - With Android: android/app/src/main/AndroidManifest.xml
+## With Android: android/app/src/main/AndroidManifest.xml
      
-      <!-- Deep Links -->
+    //  <!-- Deep Links -->
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -35,9 +35,9 @@ This's a source create by GoTrust Team
         <data
           android:scheme="https"
           android:host="[YOUR_HOST]" />
-      </intent-filter>
-     
-     - With IOS: ios/Runner/Info.plist
+     </intent-filter>
+
+## With IOS: ios/Runner/Info.plist
      
        <!-- ... other tags -->
      <key>CFBundleURLTypes</key>
