@@ -40,6 +40,8 @@ dependencies:
   awesome_bottom_bar: ^1.2.2
   #Load file svg
   flutter_svg: ^2.0.4
+  #Deeplink
+  uni_links: ^0.5.1
   #other
   path_provider: ^2.0.14
   # The following adds the Cupertino Icons font to your application.

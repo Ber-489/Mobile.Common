@@ -1,10 +1,19 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:gotrust_popup/packagestatuscode.dart';
+import 'package:source_base/resource/deeplinks/handle_deeplink_app_not_run/app_not_run.dart';
+import 'package:source_base/resource/deeplinks/handle_deeplink_app_running/app_running.dart';
 import 'package:source_base/resource/lang/translation_service.dart';
 import 'package:source_base/routes/app_pages.dart';
 import 'package:source_base/utils/common/color.dart';
 import 'package:source_base/utils/common/data.dart';
+import 'package:uni_links/uni_links.dart';
+
+bool _initialUriIsHandled = false;
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -15,10 +24,48 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
 
+  StreamSubscription? _sub;
+
   @override
   void initState() {
-    // TODO: implement initState
+    _handleInitialAppNotRunning();
+    _handleIncomingLinks();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    super.dispose();
+  }
+
+  //Deelink work when app is not run on background
+  Future<void> _handleInitialAppNotRunning() async {
+    if (!_initialUriIsHandled) {
+      _initialUriIsHandled = true;
+      try {
+        final uri = await getInitialUri();
+        if (uri == null) return;
+
+        DeeplinkAppNotRunning.appNotRunning(uri: uri);
+
+      } on FormatException catch (err) {
+        GoTrustStatusCodePopup.showSnackBar(
+            code: "", title: err.message.toString());
+      }
+    }
+  }
+
+  //Deelink work when app is run on background
+  void _handleIncomingLinks() {
+    if (!kIsWeb) {
+      _sub = uriLinkStream.listen((Uri? uri) {
+        if (!mounted) return;
+        DeeplinkAppRunning.appRunning(uri: uri);
+      }, onError: (err) {
+        GoTrustStatusCodePopup.showSnackBar(code: "", title: err.toString());
+      });
+    }
   }
 
   @override

@@ -10,3 +10,47 @@ This's a source create by GoTrust Team
    - resource: contain file config (load the first time when app run) and file language of app
    - routes: use to define navigator screen on app 
    - utils: contain common data file, logic file(validate, ...)
+
+## Deeplink was setup, you need add this config to use
+
+   - With Android: android/app/src/main/AndroidManifest.xml
+     
+      <!-- Deep Links -->
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <!-- Accepts URIs that begin with YOUR_SCHEME://YOUR_HOST -->
+        <data
+          android:scheme="[YOUR_SCHEME]"
+          android:host="[YOUR_HOST]" />
+      </intent-filter>
+
+      <!-- App Links -->
+      <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <!-- Accepts URIs that begin with https://YOUR_HOST -->
+        <data
+          android:scheme="https"
+          android:host="[YOUR_HOST]" />
+      </intent-filter>
+     
+     - With IOS: ios/Runner/Info.plist
+     
+       <!-- ... other tags -->
+     <key>CFBundleURLTypes</key>
+    <array>
+    <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLName</key>
+    <string>[ANY_URL_NAME]</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+    <string>[YOUR_SCHEME]</string>
+    </array>
+    </dict>
+    </array>
+    <!-- ... other tags -->
