@@ -1,21 +1,22 @@
-
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:source_base/resource/config/environment/Configuration.Debug.dart';
 import 'package:source_base/resource/config/environment/Configuration.PROD.dart';
 import 'package:source_base/resource/config/environment/Configuration.UAT.dart';
+import 'package:source_base/utils/stored/shared_preferences/init.dart';
 
 import '../../utils/stored/hive/hive_database.dart';
 
 class EnvConfiguration {
-  EnvConfiguration({required this.environment}) {
-    initConfig(environment);
-  }
 
-  final String environment;
+  static Future<void> initConfig({required String environment}) async {
+    /// Create global variable SharedPreferences to use for App
+    await Get.putAsync(() => StorageService().init());
 
-  void initConfig(String? environment) {
-    configHiveDataBase();
+    /// Setup HiveDatabase
+    await configHiveDataBase();
+
+    /// Setup MainUrl to connect API,.....
     switch (environment) {
       case 'dev':
         debugAppSettings();
@@ -32,15 +33,14 @@ class EnvConfiguration {
     }
   }
 
-
   // Setup Hive to use in App
- void configHiveDataBase() async{
-   //For cahe
-   final dir = await getApplicationDocumentsDirectory();
-   final _hive = HiveDatabase(dir.path);
-   await _hive.init();
-   // Get.put(ImageCacheDAO(_hive.imageCacheBox), permanent: true);
-   // Get.put(HomeCacheDAO(_hive.homeCacheBox), permanent: true);
-   // Get.put(MasterDataCacheDAO(_hive.masterDataCacheBox), permanent: true);
- }
+  static Future<void> configHiveDataBase() async {
+    //For cahe
+    final dir = await getApplicationDocumentsDirectory();
+    final _hive = HiveDatabase(dir.path);
+    await _hive.init();
+    // Get.put(ImageCacheDAO(_hive.imageCacheBox), permanent: true);
+    // Get.put(HomeCacheDAO(_hive.homeCacheBox), permanent: true);
+    // Get.put(MasterDataCacheDAO(_hive.masterDataCacheBox), permanent: true);
+  }
 }

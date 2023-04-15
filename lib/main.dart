@@ -13,11 +13,11 @@ void main() async{
   //==========
   WidgetsFlutterBinding.ensureInitialized();
   // For dev
-  EnvConfiguration(environment: 'dev');
+  await EnvConfiguration.initConfig(environment: 'dev');
   // For product
-  // EnvConfiguration(environment: 'prod');
+  // await EnvConfiguration.initConfig(environment: 'prod');
   //For uat
-  // EnvConfiguration(environment: 'uat');
+  // await EnvConfiguration.initConfig(environment: 'uat');
   runApp(const App());
   configLoading();
 }
