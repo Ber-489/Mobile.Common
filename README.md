@@ -5,9 +5,10 @@ This's a source create by GoTrust Team
 ## Getting Started
    All folders in this source:
    - api: contain all method GET, POST, DELETE, PUT and use DIO to call server to get data
+   - firebase: contain all function work with firebase
    - model: contain all object model
    - modules: contain all screen 
-   - resource: contain file config (load the first time when app run) and file language of app
+   - resource: contain file config (load the first time when app run), file language of app and file setup deeplink
    - routes: use to define navigator screen on app 
    - utils: contain common data file, logic file(validate, ...)
 
@@ -54,3 +55,9 @@ This's a source create by GoTrust Team
     </dict>
     </array>
     <!-- ... other tags -->
+
+## Firebase push notification and Service was setup
+## You must edit config to available with your project
+    - Config push noti ------ Note: Android is so easy to push noti, IOS must to setup APNs (Apple Dev) to push noti
+    - Config service login (Google, Facebook, Apple)
+    - Config firebase project - FlutterFire to setup config -- *** flutterfire configure ***

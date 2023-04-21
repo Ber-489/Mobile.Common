@@ -12,6 +12,12 @@ void main() async{
   // };
   //==========
   WidgetsFlutterBinding.ensureInitialized();
+  /// Khi nào dùng firebase mở lên
+  /// Nhớ setup FlutterFire -- flutterfire configure
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+
   // For dev
   await EnvConfiguration.initConfig(environment: 'dev');
   // For product

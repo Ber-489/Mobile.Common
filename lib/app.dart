@@ -13,6 +13,8 @@ import 'package:source_base/utils/common/color.dart';
 import 'package:source_base/utils/common/data.dart';
 import 'package:uni_links/uni_links.dart';
 
+import 'firebase/notification/firebase_cloud_messaging.dart';
+
 bool _initialUriIsHandled = false;
 
 class App extends StatefulWidget {
@@ -28,6 +30,10 @@ class _AppState extends State<App> {
 
   @override
   void initState() {
+    /// Khi nào dùng push noti thì mở nó lên
+    // FirebaseNotification().initConfig();
+    // FirebaseNotification().handleMessage();
+    /// =====================================
     _handleInitialAppNotRunning();
     _handleIncomingLinks();
     super.initState();

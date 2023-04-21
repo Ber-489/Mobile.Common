@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 import 'package:gotrust_popup/packagestatuscode.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Utils {
   /// This func use to parse string to phone number include country code
@@ -44,5 +49,24 @@ class Utils {
     }
 
     return true;
+  }
+
+  ///Use for show image noti on Android when user using app
+  static Future<String> downloadFile(String url, String fileName) async {
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final filePath = '${directory.path}/$fileName';
+      final response = await http.get(Uri.parse(url));
+      final file = File(filePath);
+
+      await file.writeAsBytes(response.bodyBytes);
+      return filePath;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error from downloadFile: $e'
+            '');
+      }
+      return '';
+    }
   }
 }
