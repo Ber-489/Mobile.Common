@@ -73,5 +73,9 @@ This's a source create by GoTrust Team
 
 # Firebase Crashlytics
     - Firebase web -> Your project -> Release & Monitor -> Crashlytics -> Choose IOS and Android to setup
-
+    - Xcode project -> Runner -> Build Phases -> Add (+) -> New Run Script Phases 
+        - Add this line
+             "${PODS_ROOT}/FirebaseCrashlytics/run"
+        - Add this line to Input Files
+         ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME} 
 # ===================================================================
