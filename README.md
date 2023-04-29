@@ -6,11 +6,16 @@ This's a source create by GoTrust Team
    All folders in this source:
    - api: contain all method GET, POST, DELETE, PUT and use DIO to call server to get data
    - firebase: contain all function work with firebase
+        # Firebase Social Service  
+        # Firebase Push Notification
+        # Firebase Crashlytics
    - model: contain all object model
    - modules: contain all screen 
    - resource: contain file config (load the first time when app run), file language of app and file setup deeplink
    - routes: use to define navigator screen on app 
    - utils: contain common data file, logic file(validate, ...)
+
+******************************* CONFIG FIRST *******************************
 
 ## Deeplink was setup, you need add this config to use
 
@@ -56,8 +61,17 @@ This's a source create by GoTrust Team
     </array>
     <!-- ... other tags -->
 
-## Firebase push notification and Service was setup
-## You must edit config to available with your project
-    - Config push noti ------ Note: Android is so easy to push noti, IOS must to setup APNs (Apple Dev) to push noti
-    - Config service login (Google, Facebook, Apple)
+# ============================ Firebase ============================
+# Setup your firebase connect with this project
     - Config firebase project - FlutterFire to setup config -- *** flutterfire configure ***
+
+# Firebase Social Service
+    - Config service login (Google, Facebook, Apple)
+
+# Firebase push notification
+    - Config push noti ------ Note: Android is so easy to push noti, IOS must to setup APNs (Apple Dev) to push noti
+
+# Firebase Crashlytics
+    - Firebase web -> Your project -> Release & Monitor -> Crashlytics -> Choose IOS and Android to setup
+
+# ===================================================================

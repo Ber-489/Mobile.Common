@@ -5,6 +5,7 @@ firebase_auth=/Users/bob/.pub-cache/hosted/pub.dev/firebase_auth-4.4.2/
 firebase_auth_web=/Users/bob/.pub-cache/hosted/pub.dev/firebase_auth_web-5.3.2/
 firebase_core=/Users/bob/.pub-cache/hosted/pub.dev/firebase_core-2.10.0/
 firebase_core_web=/Users/bob/.pub-cache/hosted/pub.dev/firebase_core_web-2.3.0/
+firebase_crashlytics=/Users/bob/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.1.2/
 firebase_messaging=/Users/bob/.pub-cache/hosted/pub.dev/firebase_messaging-14.4.1/
 firebase_messaging_web=/Users/bob/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.3.1/
 flutter_facebook_auth=/Users/bob/.pub-cache/hosted/pub.dev/flutter_facebook_auth-4.4.1+1/
