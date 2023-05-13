@@ -15,13 +15,16 @@ This's a source create by GoTrust Team
    - routes: use to define navigator screen on app 
    - utils: contain common data file, logic file(validate, ...)
 
+******************************* PROTECT *******************************
+# Android: app use "ProGuard" to optimize apk file after build and minimization case of reverse engineering to protect apk file
+# IOS: Go to Runner.xcodeproj -> Runner -> Build Settings -> Enable Bitcode -> No to block reverse engineering
 ******************************* CONFIG FIRST *******************************
 
 ## Deeplink was setup, you need add this config to use
 
 ## With Android: android/app/src/main/AndroidManifest.xml
      
-    //  <!-- Deep Links -->
+      <!-- Deep Links -->
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -45,8 +48,8 @@ This's a source create by GoTrust Team
 
 ## With IOS: ios/Runner/Info.plist
      
-       <!-- ... other tags -->
-     <key>CFBundleURLTypes</key>
+    <!-- ... other tags -->
+    <key>CFBundleURLTypes</key>
     <array>
     <dict>
     <key>CFBundleTypeRole</key>
