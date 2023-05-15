@@ -3,6 +3,8 @@ class AppDataGlobal {
   static const String appName = '';
   static  String fcmToken = "";
   static String evironment = '';
+  /// Data app life cycle
+  static DateTime? timeAppPaused;
   /// Use for verify OTP screen - set time to resend otp
   static const int timeToReSendOTP = 90;
 }

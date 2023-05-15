@@ -9,6 +9,7 @@ import 'package:source_base/resource/deeplinks/handle_deeplink_app_not_run/app_n
 import 'package:source_base/resource/deeplinks/handle_deeplink_app_running/app_running.dart';
 import 'package:source_base/resource/lang/translation_service.dart';
 import 'package:source_base/routes/app_pages.dart';
+import 'package:source_base/utils/app_life_cycle/track_life_cycle.dart';
 import 'package:source_base/utils/common/color.dart';
 import 'package:source_base/utils/common/data.dart';
 import 'package:uni_links/uni_links.dart';
@@ -24,7 +25,7 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends State<App> with WidgetsBindingObserver{
 
   StreamSubscription? _sub;
 
@@ -37,6 +38,12 @@ class _AppState extends State<App> {
     _handleInitialAppNotRunning();
     _handleIncomingLinks();
     super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    trackLifeCycleApp(state: state);
+    super.didChangeAppLifecycleState(state);
   }
 
   @override
