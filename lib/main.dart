@@ -6,6 +6,8 @@ import 'package:source_base/resource/config/config_environment.dart';
 
 import 'app.dart';
 
+// Khởi tạo GlobalKey
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async{
 

@@ -7,8 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../utils/common/data.dart';
-import '../../utils/utils.dart';
+import '../../../utils/common/data.dart';
+import '../../../utils/utils.dart';
 import '../firebase_options.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

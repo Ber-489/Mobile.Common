@@ -5,4 +5,5 @@ class KeyDataLocal{
   /// Value of key is String
   static String keyLang = 'lang';
   /// Value of key is Bool
+  static String keyBiometric = 'isTurnOnBiometric';
 }

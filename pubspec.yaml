@@ -59,6 +59,8 @@ dependencies:
   flutter_svg: ^2.0.4
   #Deeplink
   uni_links: ^0.5.1
+  #Check connect wifi
+  connectivity_plus: ^4.0.0
   #other
   path_provider: ^2.0.14
   # The following adds the Cupertino Icons font to your application.

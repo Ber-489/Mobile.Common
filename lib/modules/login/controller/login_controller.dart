@@ -77,4 +77,20 @@ class LoginController extends GetxController {
     Get.toNamed(Routes.VERIFYOTP,
         arguments: {'phone': txtPhone.text, 'type': 3});
   }
+
+  // /// Check biometricStatus = true
+  // /// Auto call to login
+  // void doLoginWithBiometric() async{
+  //   txtPhone.text = AppDataGlobal.user.phone ?? '';
+  //
+  //   if(!AppDataGlobal.biometricStatus.value) return;
+  //
+  //   bool status = await LocalAuth.showAuth(localizedReason: 'Xin hãy xác thực để đăng nhập hệ thống');
+  //
+  //   if(!status) return;
+  //
+  //   txtPassword.text = AppDataGlobal.user.password ?? '';
+  //
+  //   doLoginWithPassword();
+  // }
 }

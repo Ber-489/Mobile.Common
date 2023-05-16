@@ -9,12 +9,15 @@ import 'package:source_base/resource/deeplinks/handle_deeplink_app_not_run/app_n
 import 'package:source_base/resource/deeplinks/handle_deeplink_app_running/app_running.dart';
 import 'package:source_base/resource/lang/translation_service.dart';
 import 'package:source_base/routes/app_pages.dart';
+import 'package:source_base/service/connectivity/wifi.dart';
+import 'package:source_base/service/local_auth/local_auth.dart';
 import 'package:source_base/utils/app_life_cycle/track_life_cycle.dart';
 import 'package:source_base/utils/common/color.dart';
 import 'package:source_base/utils/common/data.dart';
+import 'package:source_base/utils/common/key_data_local.dart';
+import 'package:source_base/utils/stored/shared_preferences/get.dart';
 import 'package:uni_links/uni_links.dart';
 
-import 'firebase/notification/firebase_cloud_messaging.dart';
 
 bool _initialUriIsHandled = false;
 
@@ -35,6 +38,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     // FirebaseNotification().initConfig();
     // FirebaseNotification().handleMessage();
     /// =====================================
+    _handleInitial();
     _handleInitialAppNotRunning();
     _handleIncomingLinks();
     super.initState();
@@ -51,6 +55,17 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     _sub?.cancel();
     super.dispose();
   }
+
+  // Do all necessary func to run app
+  Future<void> _handleInitial() async{
+    /// Check device is support biometric FaceID, TouchID or NOT
+    AppDataGlobal.biometricType = await LocalAuth.isSupport();
+    /// Check status user is turn on biometric or not
+    AppDataGlobal.biometricStatus.value = await GetDataFromLocal.getBool(key: KeyDataLocal.keyBiometric) ?? false;
+    /// Get type and check type of connect is Wifi, 4G, disconnect internet
+    WifiService.connect();
+  }
+
 
   //Deelink work when app is not run on background
   Future<void> _handleInitialAppNotRunning() async {
