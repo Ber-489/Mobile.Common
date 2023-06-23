@@ -1,10 +1,16 @@
 
+import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class AppDataGlobal {
   static const String appName = '';
   static  String fcmToken = "";
   static String evironment = '';
+
+  static bool isShowPopup = false;
+
+  static OverlayEntry? overlayEntry;
+  static int? currentPriorityPopup;
   /// Data app life cycle
   static DateTime? timeAppPaused;
   /// True is turn on, false is turn off
@@ -16,6 +22,8 @@ class AppDataGlobal {
   static RxBool biometricStatus = false.obs;
   /// Use for verify OTP screen - set time to resend otp
   static const int timeToReSendOTP = 90;
+  /// Border for all widget in app
+  static double border = 16;
 }
 
 //Config API

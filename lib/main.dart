@@ -10,13 +10,12 @@ import 'app.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async{
-
+  WidgetsFlutterBinding.ensureInitialized();
   //Custom error screen
   // ErrorWidget.builder = (details) {
   //   return ErrorMainWidget('${details.exception}');
   // };
   //==========
-  WidgetsFlutterBinding.ensureInitialized();
   /// Khi nào dùng firebase mở lên
   /// Nhớ setup FlutterFire -- flutterfire configure
   // await Firebase.initializeApp(

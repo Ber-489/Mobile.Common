@@ -1,11 +1,45 @@
 import 'dart:io';
 
+import 'package:clipboard/clipboard.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:gotrust_popup/packagestatuscode.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:source_base/utils/common/asset/svg.dart';
+import 'package:source_base/utils/widget/popup/custom_popup.dart';
 
 class Utils {
+
+  /// Open setting of app in device setting
+  // static void openSetting() {
+  //   openAppSettings();
+  // }
+
+  ///Copy text
+  static void copyText({required String text}) {
+    FlutterClipboard.copy(text).then((value) async {
+      await CustomPopup.showSnackBar(
+          title: 'Thông báo', message: 'Đã sao chép');
+    });
+  }
+
+  /// Check api is maintain or not
+  static void checkMaintainAPI(
+      {required bool isMaintain, bool isShowPopup = true}) async {
+    if (!isMaintain) return;
+
+    if (isShowPopup) {
+      CustomPopup.showTextWithImage(Get.context!,
+          title: 'Thông báo',
+          message: 'Hệ thống đang cập nhật. Quay lại sau bạn nhé',
+          titleButton: 'Đã hiểu',
+          svgUrl: AssetSVGName.error);
+    } else {
+      // Code to show full screen
+    }
+  }
+
   /// This func use to parse string to phone number include country code
   /// User input 0903847529 or 903847529 ---parse---> (2 case)
   /// Case 1: if isReturnCountryCode = false -> 903847529

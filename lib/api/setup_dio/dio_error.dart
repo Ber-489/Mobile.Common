@@ -17,7 +17,6 @@ class DioExceptions implements Exception {
       case DioErrorType.badResponse:
         message = _handleError(
           dioError.response?.statusCode,
-          dioError.response?.data,
         );
         break;
       case DioErrorType.sendTimeout:
@@ -36,20 +35,20 @@ class DioExceptions implements Exception {
     }
   }
 
-  String _handleError(int? statusCode, dynamic error) {
+  String _handleError(int? statusCode) {
     switch (statusCode) {
       case 400:
-        return 'Bad request';
+        return 'Server cannot or will not process the request due to something that is perceived to be a client error';
       case 401:
-        return 'Unauthorized';
+        return 'Client request has not been completed because it lacks valid authentication credentials for the requested resource';
       case 403:
-        return 'Forbidden';
+        return 'Server understands the request but refuses to authorize it.';
       case 404:
-        return error['message'];
+        return 'Page not found';
       case 500:
-        return 'Internal server error';
+        return 'Server encountered an unexpected condition that prevented it from fulfilling the request';
       case 502:
-        return 'Bad gateway';
+        return 'Error while acting as a gateway or proxy, received an invalid response from the upstream server';
       default:
         return 'Oops something went wrong';
     }
