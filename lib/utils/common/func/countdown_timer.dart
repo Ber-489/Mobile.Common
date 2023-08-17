@@ -58,7 +58,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
          await doResendOTP();
         }
       },
-      child: CustomText.textMontserratBold(
+      child: CustomText.textPlusJakarta(
           text: _start == 0 ? 'gửi mã' :' $_start''s', fontSize: 16,colorText: Colors.blueAccent),
     );
   }

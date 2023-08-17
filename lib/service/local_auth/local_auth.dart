@@ -47,10 +47,13 @@ class LocalAuth {
       if (!isAvailable) return false;
 
       final bool didAuthenticate = await auth.authenticate(
-          localizedReason: localizedReason,
-          biometricOnly: biometricOnly,
-          useErrorDialogs: true,
-          stickyAuth: false);
+        localizedReason: localizedReason,
+        options: AuthenticationOptions(
+            biometricOnly: biometricOnly,
+            useErrorDialogs: true,
+            stickyAuth: false
+        ),
+      );
 
       return didAuthenticate;
     } catch (e) {

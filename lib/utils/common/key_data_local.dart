@@ -6,4 +6,6 @@ class KeyDataLocal{
   static String keyLang = 'lang';
   /// Value of key is Bool
   static String keyBiometric = 'isTurnOnBiometric';
+
+  static String fcmTokenKey = 'deviceToken';
 }

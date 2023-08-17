@@ -37,8 +37,11 @@ extension Button on VerifyOTPScreen {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-      CustomText.textMontserratBold(text: 'resendOTP'.tr, fontSize: 16, ),
-      const CountDownTimer(),
+          CustomText.textPlusJakarta(
+            text: 'resendOTP'.tr,
+            fontSize: 16,
+          ),
+          const CountDownTimer(),
         ],
       ),
     );
