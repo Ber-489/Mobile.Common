@@ -82,3 +82,11 @@ This's a source create by GoTrust Team
         - Add this line to Input Files
          ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME} 
 # ===================================================================
+
+# ===================== CHECK LIST =====================
+
+    - Firebase
+    - Notification setup
+    - Firebase crashlytics
+    - Deeplink setup
+    - Login Google, Facebook, Apple setup
