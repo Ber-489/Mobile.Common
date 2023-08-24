@@ -46,6 +46,8 @@ dependencies:
   google_fonts: ^5.1.0
   #Loading animation
   flutter_easyloading: ^3.0.5
+  #Image
+  cached_network_image: ^3.2.3
   #Animation
   lottie: ^2.3.0
   # OTP pin field
