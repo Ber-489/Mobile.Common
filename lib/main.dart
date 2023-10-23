@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:source_base/resource/config/config_environment.dart';
+import 'resource/config/config_environment.dart';
 
 import 'app.dart';
 

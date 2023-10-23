@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gotrust_popup/packagestatuscode.dart';
-import 'package:gotrust_popup/utils/svg/read_svg.dart';
-import 'package:source_base/routes/app_pages.dart';
-import 'package:source_base/utils/widget/text/montserrat.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../../utils/utils.dart';
 import '../../../utils/widget/loading/custom_easy_loading.dart';
 

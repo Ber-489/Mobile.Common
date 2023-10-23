@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:source_base/utils/common/data.dart';
-import 'package:source_base/utils/widget/text/montserrat.dart';
+import '../../widget/text/montserrat.dart';
+import '../data.dart';
 
 class CountDownTimer extends StatefulWidget {
   const CountDownTimer({Key? key}) : super(key: key);

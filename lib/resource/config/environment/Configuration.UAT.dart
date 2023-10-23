@@ -1,6 +1,4 @@
-
-
-import 'package:source_base/utils/common/data.dart';
+import '../../../utils/common/data.dart';
 
 void uatAppSettings() {
   AppDataGlobal.evironment = 'UAT';

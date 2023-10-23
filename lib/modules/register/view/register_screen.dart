@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:source_base/modules/register/controller/register_controller.dart';
-import 'package:source_base/utils/common/animation.dart';
 
+import '../../../utils/common/animation.dart';
 import '../../../utils/common/color.dart';
 import '../../../utils/widget/space/space.dart';
+import '../controller/register_controller.dart';
 
 part 'input_phone_number.dart';
 

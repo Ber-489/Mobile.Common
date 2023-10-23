@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:source_base/utils/language.dart';
+import '../../../utils/language.dart';
 
 class AccountController extends GetxController {
   @override

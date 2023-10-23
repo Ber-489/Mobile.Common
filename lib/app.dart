@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:gotrust_popup/packagestatuscode.dart';
-import 'package:source_base/resource/deeplinks/handle_deeplink_app_not_run/app_not_run.dart';
-import 'package:source_base/resource/deeplinks/handle_deeplink_app_running/app_running.dart';
-import 'package:source_base/resource/lang/translation_service.dart';
-import 'package:source_base/routes/app_pages.dart';
-import 'package:source_base/service/connectivity/wifi.dart';
-import 'package:source_base/service/local_auth/local_auth.dart';
-import 'package:source_base/utils/app_life_cycle/track_life_cycle.dart';
-import 'package:source_base/utils/common/color.dart';
-import 'package:source_base/utils/common/data.dart';
-import 'package:source_base/utils/common/key_data_local.dart';
-import 'package:source_base/utils/stored/shared_preferences/get.dart';
+import 'resource/deeplinks/handle_deeplink_app_not_run/app_not_run.dart';
+import 'resource/deeplinks/handle_deeplink_app_running/app_running.dart';
+import 'resource/lang/translation_service.dart';
+import 'routes/app_pages.dart';
+import 'service/connectivity/wifi.dart';
+import 'service/local_auth/local_auth.dart';
+import 'utils/app_life_cycle/track_life_cycle.dart';
+import 'utils/common/color.dart';
+import 'utils/common/data.dart';
+import 'utils/common/key_data_local.dart';
+import 'utils/stored/shared_preferences/get.dart';
 import 'package:uni_links/uni_links.dart';
 
 

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:source_base/utils/utils.dart';
 
 import '../../../routes/app_pages.dart';
+import '../../../utils/utils.dart';
 
 class VerifyOTPController extends GetxController {
   String phone = Get.arguments['phone'];

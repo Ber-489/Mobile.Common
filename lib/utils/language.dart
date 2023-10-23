@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
-import 'package:source_base/utils/common/key_data_local.dart';
-import 'package:source_base/utils/stored/shared_preferences/get.dart';
-import 'package:source_base/utils/stored/shared_preferences/set.dart';
 
 import '../resource/lang/translation_service.dart';
+import 'common/key_data_local.dart';
+import 'stored/shared_preferences/get.dart';
+import 'stored/shared_preferences/set.dart';
+
 
 class CustomLanguage {
   static Future<void> getCurrentLang() async {

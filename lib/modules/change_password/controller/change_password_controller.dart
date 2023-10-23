@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:source_base/routes/app_pages.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../../utils/widget/loading/custom_easy_loading.dart';
 
 class ChangePasswordController extends GetxController {

@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:source_base/utils/language.dart';
-
+import '../../../utils/language.dart';
 import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {

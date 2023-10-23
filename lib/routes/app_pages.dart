@@ -1,19 +1,19 @@
 import 'package:get/get.dart';
-import 'package:source_base/modules/change_password/binding/change_password_binding.dart';
-import 'package:source_base/modules/change_password/view/change_password_screen.dart';
-import 'package:source_base/modules/list_chat/binding/list_chat_binding.dart';
-import 'package:source_base/modules/list_chat/view/list_chat_screen.dart';
-import 'package:source_base/modules/register/binding/register_binding.dart';
-import 'package:source_base/modules/register/view/register_screen.dart';
 
 import '../modules/account/binding/setting_binding.dart';
 import '../modules/account/view/setting_screen.dart';
+import '../modules/change_password/binding/change_password_binding.dart';
+import '../modules/change_password/view/change_password_screen.dart';
 import '../modules/home/binding/home_binding.dart';
 import '../modules/home/view/home_screen.dart';
+import '../modules/list_chat/binding/list_chat_binding.dart';
+import '../modules/list_chat/view/list_chat_screen.dart';
 import '../modules/login/binding/login_binding.dart';
 import '../modules/login/view/login_screen.dart';
 import '../modules/main/binding/main_binding.dart';
 import '../modules/main/view/main_screen.dart';
+import '../modules/register/binding/register_binding.dart';
+import '../modules/register/view/register_screen.dart';
 import '../modules/splash/binding/splash_binding.dart';
 import '../modules/splash/view/splash_screen.dart';
 import '../modules/verifyOTP/binding/verify_otp_binding.dart';

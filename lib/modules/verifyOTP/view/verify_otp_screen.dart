@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
-import 'package:source_base/utils/common/animation.dart';
-import 'package:source_base/utils/common/func/countdown_timer.dart';
-import 'package:source_base/utils/widget/text/montserrat.dart';
 
+
+import '../../../utils/common/animation.dart';
 import '../../../utils/common/color.dart';
+import '../../../utils/common/func/countdown_timer.dart';
 import '../../../utils/widget/loading/custom_loading_animation.dart';
 import '../../../utils/widget/space/space.dart';
+import '../../../utils/widget/text/montserrat.dart';
 import '../controller/verify_otp_controller.dart';
 
 part 'input_verify_otp.dart';

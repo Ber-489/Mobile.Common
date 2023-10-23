@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:source_base/utils/common/asset/svg.dart';
-
-
+import '../common/asset/svg.dart';
 import '../widget/popup/custom_popup.dart';
 
 class APIStatusCode {

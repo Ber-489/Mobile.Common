@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:source_base/resource/config/environment/Configuration.Debug.dart';
-import 'package:source_base/resource/config/environment/Configuration.PROD.dart';
-import 'package:source_base/resource/config/environment/Configuration.UAT.dart';
-import 'package:source_base/utils/stored/shared_preferences/init.dart';
 
 import '../../utils/stored/hive/hive_database.dart';
+import '../../utils/stored/shared_preferences/init.dart';
+import 'environment/Configuration.Debug.dart';
+import 'environment/Configuration.PROD.dart';
+import 'environment/Configuration.UAT.dart';
 
 class EnvConfiguration {
 
