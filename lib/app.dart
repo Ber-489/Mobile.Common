@@ -115,6 +115,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
   }
 }
 
+/// Easyloading not use custom animation
 void configLoading() {
   EasyLoading.instance
     ..indicatorType = EasyLoadingIndicatorType.threeBounce
@@ -135,3 +136,26 @@ void configLoading() {
     ..userInteractions = false
     ..contentPadding = const EdgeInsets.all(20);
 }
+
+/// Easyloading used custom animation
+// void configLoading() {
+//   EasyLoading.instance
+//     ..loadingStyle = EasyLoadingStyle.custom
+//     ..indicatorSize = 20.0
+//     ..radius = 16.0
+//     ..lineWidth = 3.0
+//     ..progressColor = AppColor.colorLight
+//     ..backgroundColor = Colors.transparent
+//     ..indicatorColor = AppColor.colorLight
+//     ..textColor = AppColor.colorLight
+//     ..animationStyle = EasyLoadingAnimationStyle.opacity
+//     ..indicatorWidget = Lottie.asset(AssetAnimationCustom.loading)
+//     ..maskType = EasyLoadingMaskType.clear
+//     ..boxShadow = <BoxShadow>[]
+//   // ..textStyle = TextAppStyle()
+//   //     .semiBoldTextStyleExtraSmall()
+//   //     .copyWith(color: AppColor.colorLight)
+//     ..dismissOnTap = false
+//     ..userInteractions = false
+//     ..contentPadding = const EdgeInsets.all(20);
+// }
