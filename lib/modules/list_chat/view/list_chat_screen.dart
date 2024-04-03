@@ -10,6 +10,6 @@ class ListChatScreen extends GetView<ListChatController>{
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: CustomText.textPlusJakarta(text: 'ListChatScreen'),);
+    return Center(child: CustomText.text(text: 'ListChatScreen'),);
   }
 }

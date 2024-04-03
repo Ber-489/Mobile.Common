@@ -32,7 +32,7 @@ class CustomButton {
           ),
         ),
         child: Center(
-            child: CustomText.textPlusJakarta(
+            child: CustomText.text(
                 text: title,
                 maxLine: 1,
                 fontWeight: FontWeight.w700,
@@ -112,7 +112,7 @@ class CustomButton {
                   iconColor ?? AppColor.colorLight, BlendMode.srcIn),
             ),
             spaceHorizontal(width: 16),
-            CustomText.textPlusJakarta(
+            CustomText.text(
                 text: title,
                 maxLine: 1,
                 fontWeight: FontWeight.w700,

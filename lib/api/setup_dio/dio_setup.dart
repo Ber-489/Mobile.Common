@@ -225,7 +225,7 @@ class DioClient {
 class Endpoints {
 
   // base url
-  static String baseUrl = mainUrl;
+  static String baseUrl = mainURL;
 
   // receiveTimeout
   static const Duration receiveTimeout = Duration(seconds: 15);

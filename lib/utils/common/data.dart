@@ -26,8 +26,6 @@ class AppDataGlobal {
   static double border = 16;
 }
 
-//Config API
-String MAIN_URL = '';
 
 // Define Theme
 const DARK_THEME = 'DARK';

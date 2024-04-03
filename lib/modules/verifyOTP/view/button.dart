@@ -37,7 +37,7 @@ extension Button on VerifyOTPScreen {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CustomText.textPlusJakarta(
+          CustomText.text(
             text: 'resendOTP'.tr,
             fontSize: 16,
           ),

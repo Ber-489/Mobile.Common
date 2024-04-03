@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:gotrust_popup/packagestatuscode.dart';
 import 'package:lottie/lottie.dart';
 
@@ -63,14 +64,14 @@ class CustomPopup {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CustomText.textPlusJakarta(
+                      CustomText.text(
                           text: title,
                           maxLine: 2,
                           textAlign: TextAlign.center,
                           style: TextAppStyle.largeBoldTextStyle()
                               .copyWith(color: AppColor.colorTextBlue)),
                       spaceVertical(height: 12),
-                      CustomText.textPlusJakarta(
+                      CustomText.text(
                         text: message,
                         maxLine: 2,
                         textAlign: TextAlign.center,
@@ -134,7 +135,7 @@ class CustomPopup {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        if(title.isNotEmpty && !titleUnderImage) CustomText.textPlusJakarta(
+                        if(title.isNotEmpty && !titleUnderImage) CustomText.text(
                             text: title,
                             maxLine: 2,
                             textAlign: TextAlign.center,
@@ -143,14 +144,14 @@ class CustomPopup {
                         if(title.isNotEmpty && !titleUnderImage) spaceVertical(height: 12),
                         SvgPicture.asset(svgUrl,
                             height: 112, fit: BoxFit.contain),
-                        if(title.isNotEmpty && titleUnderImage) CustomText.textPlusJakarta(
+                        if(title.isNotEmpty && titleUnderImage) CustomText.text(
                             text: title,
                             maxLine: 2,
                             textAlign: TextAlign.center,
                             style: TextAppStyle.largeBoldTextStyle()
                                 .copyWith(color: AppColor.colorTextBlue)),
                         if(title.isNotEmpty && titleUnderImage) spaceVertical(height: 12),
-                        CustomText.textPlusJakarta(
+                        CustomText.text(
                           text: message,
                           maxLine: 10,
                           textAlign: TextAlign.center,
@@ -178,7 +179,9 @@ class CustomPopup {
         required String message,
         required String animationUrl,
         EdgeInsetsGeometry? padding,
-        EdgeInsetsGeometry? margin}) async {
+        EdgeInsetsGeometry? margin,
+        bool isShowButton = false,
+        Function()? onTap}) async {
     await showGeneralDialog(
         context: context,
         barrierColor: Colors.black12.withOpacity(0.3), // Background color
@@ -196,7 +199,7 @@ class CustomPopup {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // CustomText.textPlusJakarta(
+                  // CustomText.text(text: text)(
                   //     text: title,
                   //     maxLine: 2,
                   //     textAlign: TextAlign.center,
@@ -205,12 +208,19 @@ class CustomPopup {
                   // spaceVertical(height: 12),
                   Lottie.asset(animationUrl, fit: BoxFit.contain),
                   // spaceVertical(height: 12),
-                  CustomText.textPlusJakarta(
+                  CustomText.text(
                     text: message,
                     maxLine: 1,
                     style: TextAppStyle.mediumBoldTextStyle(),
                     textAlign: TextAlign.center,
                   ),
+
+                  if (isShowButton)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, left: 24, right: 24),
+                      child: CustomButton.commonButton(
+                          onTap: onTap, title: 'Kiểm tra', width: Get.width),
+                    ),
                 ],
               ),
             ),
@@ -252,7 +262,7 @@ class CustomPopup {
                 children: [
                   Lottie.asset(animationUrl,
                       fit: BoxFit.contain, repeat: repeatAnimation),
-                  CustomText.textPlusJakarta(
+                  CustomText.text(
                     text: message,
                     maxLine: 1,
                     style: TextAppStyle.mediumBoldTextStyle(),
@@ -309,7 +319,7 @@ class CustomPopup {
                 children: [
                   Lottie.asset(animationUrl,
                       fit: BoxFit.contain, repeat: repeatAnimation),
-                  CustomText.textPlusJakarta(
+                  CustomText.text(
                     text: message,
                     maxLine: 1,
                     style: TextAppStyle.mediumBoldTextStyle(),
@@ -386,14 +396,14 @@ class CustomPopup {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CustomText.textPlusJakarta(
+                        CustomText.text(
                             text: title,
                             maxLine: 2,
                             textAlign: TextAlign.center,
                             style: TextAppStyle.largeBoldTextStyle()
                                 .copyWith(color: AppColor.colorTextBlue)),
                         spaceVertical(height: 12),
-                        CustomText.textPlusJakarta(
+                        CustomText.text(
                           text: message,
                           maxLine: 6,
                           textAlign: TextAlign.center,
