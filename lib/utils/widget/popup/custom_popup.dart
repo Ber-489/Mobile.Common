@@ -46,6 +46,7 @@ class CustomPopup {
     OverlayState overlayState = Overlay.of(context);
     AppDataGlobal.overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Dialog(
+          elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -117,6 +118,7 @@ class CustomPopup {
     OverlayState overlayState = Overlay.of(context);
     AppDataGlobal.overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Dialog(
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
@@ -250,6 +252,7 @@ class CustomPopup {
     OverlayState overlayState = Overlay.of(context);
     AppDataGlobal.overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Dialog(
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
@@ -307,6 +310,7 @@ class CustomPopup {
     OverlayState overlayState = Overlay.of(context);
     AppDataGlobal.overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Dialog(
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
@@ -378,6 +382,7 @@ class CustomPopup {
     OverlayState overlayState = Overlay.of(context);
     AppDataGlobal.overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Dialog(
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
