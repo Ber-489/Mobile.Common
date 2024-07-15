@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:gotrust_popup/packagestatuscode.dart';
 import 'package:lottie/lottie.dart';
-
 
 import '../../common/button.dart';
 import '../../common/color.dart';
@@ -13,7 +11,6 @@ import '../space/space.dart';
 import '../text/montserrat.dart';
 
 class CustomPopup {
-
   static void closeOverlay() {
     AppDataGlobal.currentPriorityPopup = null;
     AppDataGlobal.isShowPopup = false;
@@ -21,19 +18,30 @@ class CustomPopup {
   }
 
   static Future<void> showSnackBar({
-    required String title,
-    required String message,
+    String? code,
+    String? title,
+    String? message,
   }) async {
-    await GoTrustStatusCodePopup.showSnackBar(
-        code: '', title: title, message: message);
+    // await GoTrustStatusCodePopup.showSnackBar(
+    //     code: '', title: title, message: message);
+
+    Get.snackbar(
+      title ?? '',
+      message ?? '',
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: Colors.black.withOpacity(0.7),
+      colorText: Colors.white,
+      borderRadius: 10,
+      margin: const EdgeInsets.all(10),
+    );
   }
 
   static Future<void> showOnlyText(context,
       {required String title,
-        required String message,
-        required String titleButton,
-        int? priority,
-        Function()? onTap}) async {
+      required String message,
+      required String titleButton,
+      int? priority,
+      Function()? onTap}) async {
     if (AppDataGlobal.isShowPopup) {
       if ((priority ?? -1) > (AppDataGlobal.currentPriorityPopup ?? -1)) {
         closeOverlay();
@@ -46,64 +54,64 @@ class CustomPopup {
     OverlayState overlayState = Overlay.of(context);
     AppDataGlobal.overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Dialog(
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Center(
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
-                  width: 280,
-                  decoration: BoxDecoration(
-                      color: AppColor.colorLight,
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomText.text(
-                          text: title,
-                          maxLine: 2,
-                          textAlign: TextAlign.center,
-                          style: TextAppStyle.largeBoldTextStyle()
-                              .copyWith(color: AppColor.colorTextBlue)),
-                      spaceVertical(height: 12),
-                      CustomText.text(
-                        text: message,
-                        maxLine: 2,
-                        textAlign: TextAlign.center,
-                      ),
-                      spaceVertical(height: 16),
-                      CustomButton.commonButton(
-                        height: 45,
-                        title: titleButton,
-                        onTap: () {
-                          closeOverlay();
-                          onTap?.call();
-                        },
-                      )
-                    ],
-                  ),
-                ),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
               ),
-            ],
-          ),
-        ));
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
+                      width: 280,
+                      decoration: BoxDecoration(
+                          color: AppColor.colorLight,
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CustomText.text(
+                              text: title,
+                              maxLine: 2,
+                              textAlign: TextAlign.center,
+                              style: TextAppStyle.largeBoldTextStyle()
+                                  .copyWith(color: AppColor.colorTextBlue)),
+                          spaceVertical(height: 12),
+                          CustomText.text(
+                            text: message,
+                            maxLine: 2,
+                            textAlign: TextAlign.center,
+                          ),
+                          spaceVertical(height: 16),
+                          CustomButton.commonButton(
+                            height: 45,
+                            title: titleButton,
+                            onTap: () {
+                              closeOverlay();
+                              onTap?.call();
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ));
     overlayState.insert(AppDataGlobal.overlayEntry!);
   }
 
   static Future<void> showTextWithImage(context,
       {required String title,
-        required String message,
-        required String titleButton,
-        required String svgUrl,
-        bool titleUnderImage = false,
-        int? priority,
-        Function()? onTap}) async {
+      required String message,
+      required String titleButton,
+      required String svgUrl,
+      bool titleUnderImage = false,
+      int? priority,
+      Function()? onTap}) async {
     // if (AppDataGlobal.isShowPopup) return;
     if (AppDataGlobal.isShowPopup) {
       if ((priority ?? -1) > (AppDataGlobal.currentPriorityPopup ?? -1)) {
@@ -137,22 +145,26 @@ class CustomPopup {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        if(title.isNotEmpty && !titleUnderImage) CustomText.text(
-                            text: title,
-                            maxLine: 2,
-                            textAlign: TextAlign.center,
-                            style: TextAppStyle.largeBoldTextStyle()
-                                .copyWith(color: AppColor.colorTextBlue)),
-                        if(title.isNotEmpty && !titleUnderImage) spaceVertical(height: 12),
+                        if (title.isNotEmpty && !titleUnderImage)
+                          CustomText.text(
+                              text: title,
+                              maxLine: 2,
+                              textAlign: TextAlign.center,
+                              style: TextAppStyle.largeBoldTextStyle()
+                                  .copyWith(color: AppColor.colorTextBlue)),
+                        if (title.isNotEmpty && !titleUnderImage)
+                          spaceVertical(height: 12),
                         SvgPicture.asset(svgUrl,
                             height: 112, fit: BoxFit.contain),
-                        if(title.isNotEmpty && titleUnderImage) CustomText.text(
-                            text: title,
-                            maxLine: 2,
-                            textAlign: TextAlign.center,
-                            style: TextAppStyle.largeBoldTextStyle()
-                                .copyWith(color: AppColor.colorTextBlue)),
-                        if(title.isNotEmpty && titleUnderImage) spaceVertical(height: 12),
+                        if (title.isNotEmpty && titleUnderImage)
+                          CustomText.text(
+                              text: title,
+                              maxLine: 2,
+                              textAlign: TextAlign.center,
+                              style: TextAppStyle.largeBoldTextStyle()
+                                  .copyWith(color: AppColor.colorTextBlue)),
+                        if (title.isNotEmpty && titleUnderImage)
+                          spaceVertical(height: 12),
                         CustomText.text(
                           text: message,
                           maxLine: 10,
@@ -178,12 +190,12 @@ class CustomPopup {
 
   static Future<void> showAnimation(context,
       {required String title,
-        required String message,
-        required String animationUrl,
-        EdgeInsetsGeometry? padding,
-        EdgeInsetsGeometry? margin,
-        bool isShowButton = false,
-        Function()? onTap}) async {
+      required String message,
+      required String animationUrl,
+      EdgeInsetsGeometry? padding,
+      EdgeInsetsGeometry? margin,
+      bool isShowButton = false,
+      Function()? onTap}) async {
     await showGeneralDialog(
         context: context,
         barrierColor: Colors.black12.withOpacity(0.3), // Background color
@@ -219,7 +231,8 @@ class CustomPopup {
 
                   if (isShowButton)
                     Padding(
-                      padding: const EdgeInsets.only(top: 12, left: 24, right: 24),
+                      padding:
+                          const EdgeInsets.only(top: 12, left: 24, right: 24),
                       child: CustomButton.commonButton(
                           onTap: onTap, title: 'Kiểm tra', width: Get.width),
                     ),
@@ -232,12 +245,12 @@ class CustomPopup {
 
   static Future<void> showAnimationWithAction(context,
       {required String message,
-        required String animationUrl,
-        EdgeInsetsGeometry? padding,
-        bool repeatAnimation = false,
-        required String titleButton,
-        int? priority,
-        Function()? onTap}) async {
+      required String animationUrl,
+      EdgeInsetsGeometry? padding,
+      bool repeatAnimation = false,
+      required String titleButton,
+      int? priority,
+      Function()? onTap}) async {
     // if (AppDataGlobal.isShowPopup) return;
     if (AppDataGlobal.isShowPopup) {
       if ((priority ?? -1) > (AppDataGlobal.currentPriorityPopup ?? -1)) {
@@ -288,14 +301,14 @@ class CustomPopup {
 
   static Future<void> showAnimationWithTwoAction(context,
       {required String message,
-        required String animationUrl,
-        EdgeInsetsGeometry? padding,
-        bool repeatAnimation = false,
-        required String titleButtonTop,
-        required String titleButtonBottom,
-        int? priority,
-        Function()? onTapTop,
-        Function()? onTapBottom}) async {
+      required String animationUrl,
+      EdgeInsetsGeometry? padding,
+      bool repeatAnimation = false,
+      required String titleButtonTop,
+      required String titleButtonBottom,
+      int? priority,
+      Function()? onTapTop,
+      Function()? onTapBottom}) async {
     // if (AppDataGlobal.isShowPopup) return;
     if (AppDataGlobal.isShowPopup) {
       if ((priority ?? -1) > (AppDataGlobal.currentPriorityPopup ?? -1)) {
@@ -358,16 +371,16 @@ class CustomPopup {
 
   static Future<void> showWithAction(context,
       {required String title,
-        required String message,
-        required String titleButtonLeft,
-        required String titleButtonRight,
-        Color? colorTextLeft,
-        Color? colorBorderLeft,
-        Color? colorTextRight,
-        Color? colorBorderRight,
-        int? priority,
-        Function()? onTapLeft,
-        Function()? onTapRight}) async {
+      required String message,
+      required String titleButtonLeft,
+      required String titleButtonRight,
+      Color? colorTextLeft,
+      Color? colorBorderLeft,
+      Color? colorTextRight,
+      Color? colorBorderRight,
+      int? priority,
+      Function()? onTapLeft,
+      Function()? onTapRight}) async {
     // if (AppDataGlobal.isShowPopup) return;
     if (AppDataGlobal.isShowPopup) {
       if ((priority ?? -1) > (AppDataGlobal.currentPriorityPopup ?? -1)) {
@@ -424,9 +437,9 @@ class CustomPopup {
                                 title: titleButtonLeft,
                                 backgroundColor: AppColor.colorLight,
                                 borderColor:
-                                colorTextLeft ?? AppColor.colorTextBlue,
+                                    colorTextLeft ?? AppColor.colorTextBlue,
                                 titleColor:
-                                colorBorderLeft ?? AppColor.colorTextBlue,
+                                    colorBorderLeft ?? AppColor.colorTextBlue,
                                 onTap: () {
                                   closeOverlay();
                                   onTapLeft?.call();

@@ -14,9 +14,11 @@ class WifiService {
   static Future<void> connect() async {
     Connectivity()
         .onConnectivityChanged
-        .listen((ConnectivityResult result) async {
+        .listen((List<ConnectivityResult> resultList) async {
+      ConnectivityResult result = resultList.first;
       if ((result == ConnectivityResult.wifi) == true ||
-          (result == ConnectivityResult.mobile) == true) {
+          (result == ConnectivityResult.mobile) == true ||
+          (result == ConnectivityResult.ethernet) == true) {
         ///Check internetStatus must false and isPopupVisible is true
         ///To auto hide popup, to avoid hide another popup which popup's not same status
         if (!AppDataGlobal.internetStatus.value &&
@@ -37,21 +39,23 @@ class WifiService {
             padding: const EdgeInsets.only(bottom: 32),
             margin: const EdgeInsets.symmetric(horizontal: 32),
             isShowButton: true, onTap: () async {
-              final status = await WifiService.check();
-              if ((status == ConnectivityResult.wifi) == true ||
-                  (status == ConnectivityResult.mobile) == true) {
-                ///Check internetStatus must false and isPopupVisible is true
-                ///To auto hide popup, to avoid hide another popup which popup's not same status
-                if (!AppDataGlobal.internetStatus.value &&
-                    AppDataGlobal.isPopupVisible) {
-                  AppDataGlobal.isPopupVisible = false;
-                  Navigator.of(Get.context!).pop();
-                }
-
-                AppDataGlobal.internetStatus.value = true;
-              }
-            },
-            animationUrl: AnimationCommon.noInternet)
+              AppDataGlobal.isPopupVisible = false;
+              Navigator.of(Get.context!).pop();
+              // final status = await WifiService.check();
+              //
+              // if ((status == ConnectivityResult.wifi) == true ||
+              //     (status == ConnectivityResult.mobile) == true) {
+              //   ///Check internetStatus must false and isPopupVisible is true
+              //   ///To auto hide popup, to avoid hide another popup which popup's not same status
+              //   if (!AppDataGlobal.internetStatus.value &&
+              //       AppDataGlobal.isPopupVisible) {
+              //     AppDataGlobal.isPopupVisible = false;
+              //     Navigator.of(Get.context!).pop();
+              //   }
+              //
+              //   AppDataGlobal.internetStatus.value = true;
+              // }
+            }, animationUrl: AnimationCommon.noInternet)
             .then((value) {
           AppDataGlobal.isPopupVisible = false;
         });
@@ -59,8 +63,8 @@ class WifiService {
     });
   }
 
-  static Future<ConnectivityResult> check() async {
-    final connectivityResult = await (Connectivity().checkConnectivity());
-    return connectivityResult;
-  }
+// static Future<ConnectivityResult> check() async {
+//   final connectivityResult = await (Connectivity().checkConnectivity());
+//   return connectivityResult;
+// }
 }

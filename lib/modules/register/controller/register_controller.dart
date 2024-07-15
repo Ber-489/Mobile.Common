@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gotrust_popup/packagestatuscode.dart';
+import 'package:source_base/utils/widget/popup/custom_popup.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../utils/utils.dart';
@@ -14,7 +14,7 @@ class RegisterController extends GetxController{
     String data = Utils.parsePhoneNumber(phone: txtPhone.text);
 
     if (data.length != 9) {
-      GoTrustStatusCodePopup.showSnackBar(code: '0', title: "Thông báo", message: 'Kiểm tra lại số điện thoại');
+      CustomPopup.showSnackBar(code: '0', title: "Thông báo", message: 'Kiểm tra lại số điện thoại');
       return false;
     }
 

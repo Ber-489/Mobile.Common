@@ -4,7 +4,6 @@ import 'package:clipboard/clipboard.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-import 'package:gotrust_popup/packagestatuscode.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'common/asset/svg.dart';
@@ -76,7 +75,7 @@ class Utils {
     String data = Utils.parsePhoneNumber(phone: phone ?? '');
 
     if (data.length != 9) {
-      GoTrustStatusCodePopup.showSnackBar(
+      CustomPopup.showSnackBar(
           code: '404',
           title: "Thông báo",
           message: 'Kiểm tra lại số điện thoại');

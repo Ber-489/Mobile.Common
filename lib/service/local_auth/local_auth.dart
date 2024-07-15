@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:gotrust_popup/packagestatuscode.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:source_base/utils/widget/popup/custom_popup.dart';
 
 class LocalAuth {
   static final LocalAuthentication auth = LocalAuthentication();
@@ -57,7 +57,7 @@ class LocalAuth {
 
       return didAuthenticate;
     } catch (e) {
-      GoTrustStatusCodePopup.showSnackBar(
+      CustomPopup.showSnackBar(
           code: '', title: 'Thông báo', message: 'Có lỗi xảy ra - $e');
       return false;
     }
