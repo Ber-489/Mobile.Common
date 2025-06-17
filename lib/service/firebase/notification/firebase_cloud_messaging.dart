@@ -12,6 +12,7 @@ import '../../../utils/common/key_data_local.dart';
 import '../../../utils/stored/shared_preferences/set.dart';
 import '../firebase_options.dart';
 
+/// Hàm xử lý notification khi app đang ở background hoặc bị kill
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -19,20 +20,14 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class FirebaseNotification {
-  Future<void> initConfig() async {
-    await _initFirebaseMessaging();
-    await _initLocalNotification();
-  }
-
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+  final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
   FlutterLocalNotificationsPlugin();
 
-  final AndroidNotificationChannel _androidNotificationChannel =
+  final AndroidNotificationChannel _androidChannel =
   const AndroidNotificationChannel(
-    'high_importance_channel',
-    'High Importance Notifications',
+    'high_importance_channel', // ID channel
+    'High Importance Notifications', // Tên channel hiển thị
     importance: Importance.max,
     enableLights: true,
     enableVibration: true,
@@ -40,23 +35,29 @@ class FirebaseNotification {
     showBadge: true,
   );
 
+  /// Khởi tạo cấu hình notification
+  Future<void> initConfig() async {
+    await _initFirebaseMessaging();
+    await _initLocalNotification();
+  }
+
+  /// Cấu hình Firebase Messaging (push từ server)
   Future<void> _initFirebaseMessaging() async {
     try {
+      // Bắt sự kiện thông báo khi app đang background/terminated
       FirebaseMessaging.onBackgroundMessage(
-        _firebaseMessagingBackgroundHandler,
-      );
+          _firebaseMessagingBackgroundHandler);
 
       await _firebaseMessaging.requestPermission(
         alert: true,
-        announcement: true,
         badge: true,
-        carPlay: false,
-        criticalAlert: true,
-        provisional: true,
         sound: true,
+        criticalAlert: true,
+        announcement: true,
+        carPlay: false,
+        provisional: true,
       );
 
-      ///Nhận thông báo khi đang mở ứng dụng trên IOS
       if (Platform.isIOS) {
         await _firebaseMessaging.setForegroundNotificationPresentationOptions(
           alert: true,
@@ -65,92 +66,66 @@ class FirebaseNotification {
         );
       }
 
-      // //Kiểm tra FCM token đã có trong đt chưa
-      // String fcm =
-      //     await GetDataFromLocal.getString(key: KeyDataLocal.fcmTokenKey);
-      //
-      // // Nếu Token đã được tạo thì không cần tạo lại
-      // if(fcm != '') {
-      //   print('***** FCM token is exist !!!');
-      //   return;
-      // };
-
-      /// Dùng để tự động tạo FCM token
-      /// True: mỗi lần mở app sẽ gọi và tạo FCM token mới
-      /// False: chỉ tạo 1 lần đầu - Nên để false
+      // Tắt chế độ tạo token mỗi lần mở app
       await _firebaseMessaging.setAutoInitEnabled(false);
 
-      /// Lấy FCM token
-      /// FCM là unique token trên mỗi thiết bị dùng để push noti
-      await _firebaseMessaging.getToken().then((String? token) async {
-        if (kDebugMode) {
-          print('***** FCM Token: $token');
-        }
-
-        await SetDataToLocal.setString(
-            key: KeyDataLocal.fcmTokenKey, data: token.toString());
-
-        AppDataGlobal.fcmToken = token ?? '';
-      });
+      // Lấy FCM token
+      final token = await _firebaseMessaging.getToken();
+      if (kDebugMode) {
+        print('[FCM Token] $token');
+      }
+      AppDataGlobal.fcmToken = token ?? '';
+      await SetDataToLocal.setString(
+        key: KeyDataLocal.fcmTokenKey,
+        data: token ?? '',
+      );
     } catch (e) {
       if (kDebugMode) {
-        print('***** Bug from initFirebaseMessaging: $e');
+        print('[FirebaseMessaging Error] $e');
       }
     }
   }
 
+  /// Cấu hình hiển thị notification local
   Future<void> _initLocalNotification() async {
     try {
-      const AndroidInitializationSettings initialzationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-      final DarwinInitializationSettings initializationSettingsIOS =
-      DarwinInitializationSettings(
+      const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
+
+      final iosInit = DarwinInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
         requestSoundPermission: true,
         defaultPresentAlert: true,
         defaultPresentBadge: true,
         defaultPresentSound: true,
-        onDidReceiveLocalNotification:
-            (int? id, String? title, String? body, String? payload) async {
-          await launchUrl(
-              Uri.parse(json.decode(payload!)['launchUrl'].toString()),
-              mode: LaunchMode.externalNonBrowserApplication);
-          // if (payload?.isNotEmpty ?? false) {
-          /// ["id"]: Key json chứa ID của thông báo server trả về.
-          /// Dùng để điều hướng vào màn chi tiết thông báo
-          /// Mặc định đang là ["id"]
-          // Navigator.of(AppConfig.navigatorKey.currentContext).pushNamed(
-          //   DetailNotificationScreen.routeName,
-          //   arguments: int.tryParse(
-          //     json.decode(payload)["id"]?.toString(),
-          //   ),
-          // );
-          // }
+        onDidReceiveLocalNotification: (id, title, body, payload) async {
+          final launchUrlStr = json.decode(payload ?? '')['launchUrl'];
+          if (launchUrlStr != null) {
+            await launchUrl(
+              Uri.parse(launchUrlStr),
+              mode: LaunchMode.externalNonBrowserApplication,
+            );
+          }
         },
       );
-      final InitializationSettings initializationSettings =
-      InitializationSettings(
-        android: initialzationSettingsAndroid,
-        iOS: initializationSettingsIOS,
+
+      final initSettings = InitializationSettings(
+        android: androidInit,
+        iOS: iosInit,
       );
 
-      try {
-        await _flutterLocalNotificationsPlugin.initialize(
-          initializationSettings,
-          onDidReceiveNotificationResponse: _onSelectNotifcation,
+      await _localNotificationsPlugin.initialize(
+        initSettings,
+        onDidReceiveNotificationResponse: _onSelectNotification,
+      );
 
-          /// ******************* onDidReceiveBackgroundNotificationResponse *******************
-          // onDidReceiveBackgroundNotificationResponse: _onSelectNotifcation,
-        );
-      } catch (e) {
-        if (kDebugMode) {
-          print('initialize: ${e.toString()}');
-        }
-      }
-
-      if (Platform.isIOS) {
-        await _flutterLocalNotificationsPlugin
+      if (Platform.isAndroid) {
+        await _localNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+            ?.createNotificationChannel(_androidChannel);
+      } else if (Platform.isIOS) {
+        await _localNotificationsPlugin
             .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin>()
             ?.requestPermissions(
@@ -158,143 +133,70 @@ class FirebaseNotification {
           badge: true,
           sound: true,
         );
-      } else if (Platform.isAndroid) {
-        await _flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-            ?.createNotificationChannel(_androidNotificationChannel);
       }
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('[LocalNotification Error] $e');
     }
   }
 
+  /// Xử lý khi bấm vào notification (app đang mở)
   Future<void> handleMessage() async {
     try {
-      /// Lấy tất cả thông báo khiến ứng dụng mở từ terminated state
-      /// Một khi lấy ra thông báo để điều hướng, nó sẽ bị remove
-      /// Tương tác với thông báo khi ứng dụng đang ở terminated
+      // Trường hợp app đang tắt → mở bằng notification
       final RemoteMessage? initialMessage =
       await _firebaseMessaging.getInitialMessage();
 
-      /// Khi khởi động app thì sẽ chạy vào đây
-      /// Nếu App đang tắt và nhấn mở thông báo thì initialMessage sẽ có data
-      /// Xử lý tương tác với thông báo khi người dùng đang tắt app
-      if (initialMessage != null) {
-        if (initialMessage.data.isNotEmpty) {
-          /// ["id"]: Key json chứa ID của thông báo server trả về.
-          /// Dùng để điều hướng vào màn chi tiết thông báo
-          /// Mặc định đang là ["id"]
-          // Navigator.of(AppConfig.navigatorKey.currentContext).pushNamed(
-          //   DetailNotificationScreen.routeName,
-          //   arguments: int.tryParse(
-          //     initialMessage?.data["id"]?.toString(),
-          //   ),
-          // );
-        }
+      if (initialMessage?.data.isNotEmpty ?? false) {
+        _handleDataPayload(initialMessage!.data);
       }
 
-      /// Khi đang mở ứng dụng, thông báo Firebase sẽ vào hàm onMessageOpenedApp
-      /// Android sẽ block toàn bộ thông báo đẩy, cần cấu hình thêm thư viện flutter_local_notifications để hiển thị thông báo cũng như tương tác thông báo
-      /// IOS cần call hàm setForegroundNotificationPresentationOptions để nhận thông báo khi đang mở ứng dụng
-      /// Cơ chế hiện tại đang có thể nhận thông báo khi đang dùng ứng dụng nhưng nếu muốn custom lại thì dùng hàm này
-      FirebaseMessaging.onMessageOpenedApp.listen(
-            (RemoteMessage message) {
-          /// ["id"]: Key json chứa ID của thông báo server trả về.
-          /// Dùng để điều hướng vào màn chi tiết thông báo
-          /// Mặc định đang là ["id"]
-          if (message.data.isNotEmpty) {
-            // Navigator.of(AppConfig.navigatorKey.currentContext).pushNamed(
-            //   DetailNotificationScreen.routeName,
-            //   arguments: int.tryParse(
-            //     message?.data["id"]?.toString(),
-            //   ),
-            // );
-          }
-        },
-      );
+      // Trường hợp app đang foreground → bấm noti
+      FirebaseMessaging.onMessageOpenedApp.listen((message) {
+        if (message.data.isNotEmpty) {
+          _handleDataPayload(message.data);
+        }
+      });
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('[HandleMessage Error] $e');
     }
   }
 
-  // Future<void> _showNotification(RemoteMessage message) async {
-  //   print('================== Message ==================');
-  //   try {
-  //     final RemoteNotification? remoteNotification = message.notification;
-  //
-  //     final bigPicturePath = await Utils.downloadFile(
-  //         remoteNotification?.android?.imageUrl.toString() ?? '', 'bigPicture');
-  //
-  //     print('remoteNotification:${remoteNotification?.title}');
-  //     if (remoteNotification != null) {
-  //       print('go go');
-  //       await _flutterLocalNotificationsPlugin.show(
-  //         remoteNotification.hashCode,
-  //         remoteNotification.title,
-  //         remoteNotification.body,
-  //         NotificationDetails(
-  //           android: AndroidNotificationDetails(
-  //             _androidNotificationChannel.id,
-  //             _androidNotificationChannel.name,
-  //             importance: Importance.max,
-  //             visibility: NotificationVisibility.public,
-  //             priority: Priority.max,
-  //             playSound: true,
-  //             enableLights: true,
-  //             enableVibration: true,
-  //             styleInformation: bigPicturePath == ''
-  //                 ? null
-  //                 : BigPictureStyleInformation(
-  //                     FilePathAndroidBitmap(bigPicturePath),
-  //                   ),
-  //           ),
-  //           iOS: DarwinNotificationDetails(
-  //             presentAlert: true,
-  //             presentBadge: true,
-  //             presentSound: true,
-  //             subtitle: remoteNotification.title,
-  //           ),
-  //         ),
-  //         payload: json.encode(message.data),
-  //       );
-  //     }
-  //   } catch (e) {
-  //     debugPrint('Error message: $e');
-  //   }
-  // }
-
-  Future<void> _onSelectNotifcation(
-      NotificationResponse? notificationResponse) async {
-    print(
-        'ONTAP NOTIFICATION: ${notificationResponse?.payload} -- ${notificationResponse?.id}');
-
-    // if (payload?.isNotEmpty ?? false) {
-    /// ["id"]: Key json chứa ID của thông báo server trả về.
-    /// Dùng để điều hướng vào màn chi tiết thông báo
-    /// Mặc định đang là ["id"]
-    // Navigator.of(AppConfig.navigatorKey.currentContext).pushNamed(
-    //   DetailNotificationScreen.routeName,
-    //   arguments: int.tryParse(
-    //     json.decode(payload)["id"]?.toString(),
-    //   ),
-    // );
-    // }
+  /// Hàm dùng để xử lý payload data khi nhấn vào notification
+  void _handleDataPayload(Map<String, dynamic> data) {
+    final type = data['type'];
+    final membershipId = data['membershipId'];
+    final session = data['session'];
+    // TODO: xử lý điều hướng dựa vào type hoặc id
+    print('[Notification Data] id: $membershipId, type: $type, session: $session');
   }
 
+  /// Xử lý khi chọn vào notification local
+  Future<void> _onSelectNotification(NotificationResponse? response) async {
+    final payload = response?.payload;
+    if (payload?.isNotEmpty ?? false) {
+      final data = json.decode(payload!);
+      final id = data['id'];
+      final type = data['type'];
+      print('[Tapped Local Notification] id: $id, type: $type');
+      // TODO: chuyển hướng theo logic nếu cần
+    }
+  }
+
+  /// Reset lại token FCM trên thiết bị
   Future<void> resetDeviceToken() async {
     await _firebaseMessaging.deleteToken();
   }
 
+  /// Theo dõi token firebase thay đổi
   Future<void> handleTokenFirebase() async {
-    await _firebaseMessaging.getToken().then((String? token) {
-      if (kDebugMode) {
-        print('FIREBASE TOKEN: $token');
-      }
-    });
+    final token = await _firebaseMessaging.getToken();
+    if (kDebugMode) {
+      print('[FCM Init Token] $token');
+    }
+
     _firebaseMessaging.onTokenRefresh.listen((token) {
       if (kDebugMode) {
-        print('TOKEN FIREBASE CHANGE: $token');
+        print('[FCM Token Refresh] $token');
       }
     });
   }
