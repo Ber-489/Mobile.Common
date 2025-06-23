@@ -3,16 +3,19 @@ import '../common/asset/svg.dart';
 import '../widget/popup/custom_popup.dart';
 
 class APIStatusCode {
-  static Future<void> check({int? statusCode, String? message}) async {
+  static Future<void> check({int? statusCode, String? message, bool isHidePopup = false}) async {
     String svgUrl = _handleImageError(statusCode);
     String title = _handleTitleError(statusCode);
+    if (statusCode == -1) return;
 
-     CustomPopup.showTextWithImage(Get.context!,
-        title: title,
-        message: '$message',
-        titleButton: 'know'.tr,
-        titleUnderImage: true,
-        svgUrl: svgUrl);
+    if(!isHidePopup) {
+      await CustomPopup.showTextWithImage(Get.context!,
+          title: title,
+          message: '$message',
+          titleButton: 'Đã hiểu',
+          titleUnderImage: true,
+          svgUrl: svgUrl);
+    }
   }
 
   static String _handleImageError(int? statusCode) {
@@ -49,7 +52,7 @@ class APIStatusCode {
       case 502:
         return 'Bad gateway';
       default:
-        return 'something_wrong'.tr;
+        return 'Có gì đó không ổn'.tr;
     }
   }
 }

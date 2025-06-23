@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:source_base/utils/widget/popup/custom_popup.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../utils/utils.dart';
 import '../../../utils/widget/loading/custom_easy_loading.dart';
+import '../../../utils/widget/popup/custom_popup.dart';
 
 class RegisterController extends GetxController{
   TextEditingController txtPhone = TextEditingController();

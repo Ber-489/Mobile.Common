@@ -6,14 +6,9 @@ import 'package:get/get.dart';
 import 'resource/lang/translation_service.dart';
 import 'routes/app_pages.dart';
 import 'service/connectivity/wifi.dart';
-import 'service/local_auth/local_auth.dart';
 import 'utils/app_life_cycle/track_life_cycle.dart';
 import 'utils/common/color.dart';
 import 'utils/common/data.dart';
-import 'utils/common/key_data_local.dart';
-import 'utils/stored/shared_preferences/get.dart';
-
-
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -22,8 +17,7 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> with WidgetsBindingObserver{
-
+class _AppState extends State<App> with WidgetsBindingObserver {
   StreamSubscription? _sub;
 
   @override
@@ -33,7 +27,6 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     // FirebaseNotification().handleMessage();
     /// =====================================
     _handleInitial();
-    _handleDeeplink();
     super.initState();
   }
 
@@ -50,21 +43,10 @@ class _AppState extends State<App> with WidgetsBindingObserver{
   }
 
   // Do all necessary func to run app
-  Future<void> _handleInitial() async{
-    /// Check device is support biometric FaceID, TouchID or NOT
-    AppDataGlobal.biometricType = await LocalAuth.isSupport();
-    /// Check status user is turn on biometric or not
-    AppDataGlobal.biometricStatus.value = await GetDataFromLocal.getBool(key: KeyDataLocal.keyBiometric) ?? false;
+  Future<void> _handleInitial() async {
     /// Get type and check type of connect is Wifi, 4G, disconnect internet
     WifiService.connect();
   }
-
-
-  /// Deeplink
-  Future<void> _handleDeeplink() async {
-
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +81,9 @@ void configLoading() {
     ..textColor = AppColor.colorLight
     ..maskColor = AppColor.colorDark.withOpacity(0.5)
     ..animationStyle = EasyLoadingAnimationStyle.opacity
-  // ..textStyle = TextAppStyle()
-  //     .semiBoldTextStyleExtraSmall()
-  //     .copyWith(color: AppColor.colorLight)
+    // ..textStyle = TextAppStyle()
+    //     .semiBoldTextStyleExtraSmall()
+    //     .copyWith(color: AppColor.colorLight)
     ..dismissOnTap = false
     ..userInteractions = false
     ..contentPadding = const EdgeInsets.all(20);

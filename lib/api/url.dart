@@ -14,6 +14,4 @@ String mainURL = '';
 // String mainUATUrl = 'https://api-beta.shopdi.io/';
 
 class SubAPI {
-
-  static String faceMatching = 'ekyc/face_matching';
 }

@@ -2,10 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
+import '../../service/logger/log.dart';
+
 class AppDataGlobal {
   static const String appName = '';
   static  String fcmToken = "";
   static String evironment = '';
+
+  static LogCustoms log = LogCustoms();
 
   static bool isShowPopup = false;
 

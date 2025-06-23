@@ -73,7 +73,7 @@ class CustomPopup {
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
                     width: 480,
-                    constraints: BoxConstraints(minHeight: 280),
+                    constraints: const BoxConstraints(minHeight: 280),
                     decoration: BoxDecoration(
                       color: AppColor.colorLight,
                       borderRadius: BorderRadius.circular(16),

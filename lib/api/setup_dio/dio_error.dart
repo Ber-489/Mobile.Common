@@ -3,26 +3,26 @@ import 'package:dio/dio.dart';
 class DioExceptions implements Exception {
   late String message;
 
-  DioExceptions.fromDioError(DioError dioError) {
+  DioExceptions.fromDioError(DioException dioError) {
     switch (dioError.type) {
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         message = "Request to API server was cancelled";
         break;
-      case DioErrorType.connectionTimeout:
+      case DioExceptionType.connectionTimeout:
         message = "Connection timeout with API server";
         break;
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         message = "Receive timeout in connection with API server";
         break;
-      case DioErrorType.badResponse:
+      case DioExceptionType.badResponse:
         message = _handleError(
           dioError.response?.statusCode,
         );
         break;
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         message = "Send timeout in connection with API server";
         break;
-      case DioErrorType.unknown:
+      case DioExceptionType.unknown:
         if (dioError.message!.contains("SocketException")) {
           message = 'No Internet';
           break;
@@ -38,19 +38,19 @@ class DioExceptions implements Exception {
   String _handleError(int? statusCode) {
     switch (statusCode) {
       case 400:
-        return 'Server cannot or will not process the request due to something that is perceived to be a client error';
+        return 'Yêu cầu không hợp lệ. Vui lòng kiểm tra lại thông tin hoặc liên hệ nhân viên hỗ trợ';
       case 401:
-        return 'Client request has not been completed because it lacks valid authentication credentials for the requested resource';
+        return 'Vui lòng đăng nhập và thử lại. Nếu chưa có tài khoản, hãy đăng ký';
       case 403:
-        return 'Server understands the request but refuses to authorize it.';
+        return 'Truy cập thất bại\nVui lòng kiểm tra lại quyền truy cập hoặc liên hệ nhân viên để được hỗ trợ';
       case 404:
-        return 'Page not found';
+        return 'Không tìm thấy trang yêu cầu\nKiểm tra lại link hoặc quay lại trang chủ';
       case 500:
-        return 'Server encountered an unexpected condition that prevented it from fulfilling the request';
+        return 'Có sự cố xảy ra trên máy chủ\nVui lòng thử lại sau. Nếu lỗi vẫn tiếp diễn, hãy liên hệ với bộ phận hỗ trợ.';
       case 502:
-        return 'Error while acting as a gateway or proxy, received an invalid response from the upstream server';
+        return 'Máy chủ gặp sự cố khi phản hồi yêu cầu\nHãy đợi vài phút và thử lại. Nếu vẫn không được, liên hệ với bộ phận hỗ trợ';
       default:
-        return 'Oops something went wrong';
+        return 'Hệ thống có vấn đề vui lòng thử lại - $statusCode';
     }
   }
 
