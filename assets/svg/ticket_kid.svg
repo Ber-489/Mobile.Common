@@ -1,0 +1,23 @@
+<svg width="61" height="67" viewBox="0 0 61 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_11027_1100)">
+<g clip-path="url(#clip0_11027_1100)">
+<path d="M0 12C0 5.37258 5.37258 0 12 0H49C55.6274 0 61 5.37258 61 12V52C61 58.6274 55.6274 64 49 64H12C5.37258 64 0 58.6274 0 52V12Z" fill="#496C7E"/>
+<path d="M49.4071 13.3251C47.8509 12.3126 45.7978 12.6314 44.6071 14.047C42.329 16.7564 38.0353 20.6751 31.9884 21.2189H29.1384C23.0915 20.6751 18.7977 16.7564 16.5196 14.047C15.329 12.622 13.2759 12.3126 11.729 13.3157C9.86337 14.5345 9.50712 17.122 10.979 18.7907C13.2665 21.397 17.1009 24.8845 22.454 26.797V52.6439C22.454 54.4907 23.954 55.9907 25.8009 55.9907C27.6477 55.9907 29.1477 54.4907 29.1477 52.6439V42.1814H32.0165V52.6532C32.0165 54.5001 33.5165 56.0001 35.3634 56.0001C37.2103 56.0001 38.7103 54.5001 38.7103 52.6532V26.8064C44.0634 24.8939 47.8978 21.4064 50.1853 18.8001C51.629 17.122 51.2728 14.5345 49.4071 13.3251Z" fill="white"/>
+<path d="M30.5623 19.8125C33.8242 19.8125 36.4685 17.1682 36.4685 13.9062C36.4685 10.6443 33.8242 8 30.5623 8C27.3003 8 24.656 10.6443 24.656 13.9062C24.656 17.1682 27.3003 19.8125 30.5623 19.8125Z" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_11027_1100" x="0" y="0" width="61" height="67" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="3"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.921154 0 0 0 0 0.921154 0 0 0 0 0.921154 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_11027_1100"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_11027_1100" result="shape"/>
+</filter>
+<clipPath id="clip0_11027_1100">
+<path d="M0 12C0 5.37258 5.37258 0 12 0H49C55.6274 0 61 5.37258 61 12V52C61 58.6274 55.6274 64 49 64H12C5.37258 64 0 58.6274 0 52V12Z" fill="white"/>
+</clipPath>
+</defs>
+</svg>
