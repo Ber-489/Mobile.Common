@@ -12,12 +12,12 @@ import 'dio_error.dart';
 
 class DioClient {
   // dio instance
-  final Dio _dio;
+  final Dio _dio = Dio();
   final timingInterceptor = TimingInterceptor();
   final stateTrackingInterceptor = StateTrackingInterceptor();
   Duration receiveTimeout;
 
-  DioClient(this._dio, {this.receiveTimeout = Endpoints.receiveTimeout}) {
+  DioClient({this.receiveTimeout = Endpoints.receiveTimeout}) {
     _dio
       ..options.baseUrl = Endpoints.baseUrl
       // ..options.headers = Endpoints.headers
