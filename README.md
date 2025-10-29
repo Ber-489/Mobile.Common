@@ -89,4 +89,4 @@ This's a source create by GoTrust Team
     - Notification setup
     - Firebase crashlytics
     - Deeplink setup
-    - Login Google, Facebook, Apple setup
+    - Login Google, Facebook, Apple setup# Mobile.Common
