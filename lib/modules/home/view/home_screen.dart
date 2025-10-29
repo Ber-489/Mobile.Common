@@ -6,10 +6,6 @@ import '../controller/home_controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
   @override
-  final controller = Get.put(HomeController());
-
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
